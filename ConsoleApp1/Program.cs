@@ -8,7 +8,6 @@ namespace OllamaWithSemanticKernel
     {
         static async Task Main(string[] args)
         {
-            // llama2 in Ubuntu local in WSL
             var ollamaChat = new CustomChatCompletionService();
             ollamaChat.ModelUrl = "http://localhost:11434/v1/chat/completions";
             ollamaChat.ModelName = "gemma:2b";
@@ -22,11 +21,29 @@ namespace OllamaWithSemanticKernel
             var chat = kernel.GetRequiredService<IChatCompletionService>();
             var history = new ChatHistory();
             history.AddSystemMessage("您是一位有用的助手，可以使用有趣的風格和表情符號來回應。 你的名字是悟空。使用繁體中文對談");
-            history.AddUserMessage("嗨，你是誰？");
 
-            // print response
-            var result = await chat.GetChatMessageContentsAsync(history);
-            Console.WriteLine(result[^1].Content);
+            // Start the conversation
+            Console.Write("User > ");
+            string? userInput;
+            while ((userInput = Console.ReadLine()) != null)
+            {
+                // Add user input
+                history.AddUserMessage(userInput);
+
+                // Get the response from the AI
+                var result = await chat.GetChatMessageContentsAsync(
+                    history
+                );
+
+                // Print the results
+                Console.WriteLine("Assistant > " + result[^1].Content);
+
+                // Add the message from the agent to the chat history
+                history.AddMessage(result[^1].Role, result[^1].Content ?? string.Empty);
+
+                // Get user input again
+                Console.Write("User > ");
+            }
         }
     }
 }
