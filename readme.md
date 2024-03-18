@@ -8,7 +8,8 @@
 
 範例程式: https://github.com/antonylu0826/OllamaWithSemanticKernel
 
-![Untitled](C#%20SemanticKernel%20%E9%80%A3%E6%8E%A5%20Ollama%20%E4%BD%BF%E7%94%A8%20Gemma%20%E9%96%8B%E6%BA%90%E6%A8%A1%E5%9E%8B%204b5191842d7d4aa8a1dbaca1d882a2ac/Untitled.png)
+![image](https://github.com/antonylu0826/OllamaWithSemanticKernel/assets/92000976/211324cb-dd2b-4d6b-a287-db2ca1f29cf6)
+
 
 semantic kernel 對於非OpenAI的模型，需要透過自訂LLM的方式來連接。所以這裡實作了CustomChatCompletionService 物件
 
